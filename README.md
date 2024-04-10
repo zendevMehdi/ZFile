@@ -26,7 +26,7 @@ You can get jar from release section or create new project and add src folder to
 
 ## Usage/Examples
 
-Here we access all the partitions mounted on the system and fetch information from them.
+I created a simple text file and fetch these information from it.
 
 ```java
 package org.zendev.lib.file;
