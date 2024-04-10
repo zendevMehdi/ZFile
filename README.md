@@ -51,11 +51,11 @@ public class App {
 # Output
 
 Type: text/plain </br>
-Name: build.txt
-Base name: build
-Owner: ZENDEV\mehdi
-Parent path: D:\programming\libs\ZFile
-Parent name: ZFile
-Size: 25 (bytes)
+Name: build.txt </br>
+Base name: build </br>
+Owner: ZENDEV\mehdi </br>
+Parent path: D:\programming\libs\ZFile </br>
+Parent name: ZFile </br>
+Size: 25 (bytes) </br>
 
-Process finished with exit code 0
+Process finished with exit code 0 </br>
