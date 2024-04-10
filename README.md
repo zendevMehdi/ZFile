@@ -17,6 +17,7 @@ This library help developers to access files and folders information such as (mo
 - Rename/delete/copy items
 - Get files type without need extension
 - Get items name/base name and extensions
+- Access items parent name or path
 
 ## Installation
 
@@ -28,22 +29,33 @@ You can get jar from release section or create new project and add src folder to
 Here we access all the partitions mounted on the system and fetch information from them.
 
 ```java
-package org.zendev.lib.system;
+package org.zendev.lib.file;
 
-import org.zendev.lib.system.partition.PartitionManager;
+import java.io.IOException;
 
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Access system partitions");
-        System.out.println("----------------------------------");
+    public static void main(String[] args) throws IOException {
+        var cf = new ZFile("build.txt");
 
-        PartitionManager.getPartitions(true).forEach(p -> {
-            System.out.printf("%s\n", p.getPartition());
-            System.out.printf("Total space: %d (bytes)\n", p.getTotalSpace());
-            System.out.printf("Free space: %d (bytes)\n", p.getFreeSpace());
-            System.out.printf("Used space: %d (bytes)\n", p.getUsedSpace());
-            System.out.printf("System partition: %b\n", p.isSystemPartition());
-        });
+        System.out.printf("Type: %s\n", cf.getType());
+        System.out.printf("Name: %s\n", cf.getName());
+        System.out.printf("Base name: %s\n", cf.getBaseName());
+        System.out.printf("Owner: %s\n", cf.getOwner(true));
+        System.out.printf("Parent path: %s\n", cf.getParentPath());
+        System.out.printf("Parent name: %s\n", cf.getParentName());
+        System.out.printf("Size: %s (bytes)\n", cf.getSize());
     }
 }
 ```
+
+# Output
+
+Type: text/plain
+Name: build.txt
+Base name: build
+Owner: ZENDEV\mehdi
+Parent path: D:\programming\libs\ZFile
+Parent name: ZFile
+Size: 25 (bytes)
+
+Process finished with exit code 0
