@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Array;
 import java.nio.channels.FileLock;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +24,7 @@ public class ZFile {
     private String path;
 
     public ZFile(String path) {
-        this.path = path;
+        setPath(path);
     }
 
     public String getPath() {
@@ -31,7 +32,7 @@ public class ZFile {
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.path = new File(path).getAbsolutePath();
     }
 
     private boolean isFolder() {
@@ -95,16 +96,28 @@ public class ZFile {
 
     public String getName() throws IOException {
         checkItem();
+        if (Arrays.asList(File.listRoots()).contains(new File(path))) {
+            return path;
+        }
+
         return Path.of(path).getFileName().toString();
     }
 
     public String getBaseName() throws IOException {
         checkItem();
+        if (Arrays.asList(File.listRoots()).contains(new File(path))) {
+            return path;
+        }
+
         return FilenameUtils.getBaseName(path);
     }
 
     public String getExtension() throws IOException {
         checkItem();
+        if (Arrays.asList(File.listRoots()).contains(new File(path))) {
+            return path;
+        }
+
         return FilenameUtils.getExtension(path);
     }
 
@@ -134,7 +147,12 @@ public class ZFile {
     }
 
     public String getParentPath() {
+        if (Arrays.asList(File.listRoots()).contains(new File(path))) {
+            return path;
+        }
+
         Path pth = Path.of(path);
+
         if (pth.getParent() == null) {
             return pth.getRoot().toString();
         }
@@ -143,6 +161,10 @@ public class ZFile {
     }
 
     public String getParentName() {
+        if (Arrays.asList(File.listRoots()).contains(new File(path))) {
+            return path;
+        }
+
         Path pth = Path.of(path);
 
         if (pth.getParent() == null) {
