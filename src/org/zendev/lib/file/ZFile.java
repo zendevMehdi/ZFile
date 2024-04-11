@@ -7,11 +7,11 @@ import org.zendev.lib.file.options.FileTimeAttribute;
 import org.zendev.lib.file.options.FolderListType;
 import org.zendev.lib.file.options.ItemType;
 
+import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.reflect.Array;
 import java.nio.channels.FileLock;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -216,6 +216,10 @@ public class ZFile {
                 return "";
             }
         }
+    }
+
+    public Icon getIcon() {
+        return FileSystemView.getFileSystemView().getSystemIcon(new File(path));
     }
 
     public boolean delete() throws IOException {
